@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giỏ hàng - BabyCake</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+</head>
+<body>
+ <header>
+  <div class="container header-wrap">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/Logo.png" alt="BabyCake Logo">
+      </a>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Trang chủ</a></li>
+        <li><a href="sanpham.html">Sản phẩm</a></li>
+        <li><a href="gocchiase.html">Góc chia sẻ</a></li>
+        <li><a href="lienhe.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Giỏ hàng + Người dùng -->
+    <div class="header-actions">
+      <div class="cart-container">
+        <button class="cart-toggle" onclick="toggleCart()">
+          🛒 <span id="cart-count">0</span>
+        </button>
+        <div class="cart-box" id="cart-box">
+          <h3 class="cart-title">Giỏ hàng</h3> 
+          <ul id="cart-items" class="cart-items"></ul>
+          <div class="cart-footer">
+            <p class="total-amount" id="total">0đ</p>
+            <div class="cart-buttons">
+              <button class="btn-outline" onclick="viewCart()">XEM GIỎ HÀNG</button>
+              <button class="btn-primary" onclick="checkout()">THANH TOÁN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-info">
+        <span id="username-display"></span>
+        <span id="welcome-user" style="margin-left: auto; font-weight: bold;"></span>
+        <a href="dangnhap.html" id="login-link">
+          <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="User Icon" class="user-icon">
+        </a>
+        <button id="logout-btn" class="hidden">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+    </div>
+  </header>
+
+ <section class="cart-page">
+  <div class="container">
+    <h2>Giỏ hàng của bạn</h2>
+    <ul id="cart-items-page"></ul>
+    <p id="total-page" class="total-price">Tổng tiền: 0đ</p>
+    <button onclick="clearCart()" class="checkout-btn">Xóa toàn bộ giỏ hàng</button>
+    <button onclick="checkoutCart()" class="checkout-btn" style="margin-left: 10px; background-color: #28a745;">Đặt Hàng</button>
+    <p id="order-status" style="margin-top: 15px; font-weight: bold; color: #007bff;"></p>
+  </div>
+</section>
+<!-- Form popup nhập thông tin khách hàng -->
+<div id="checkout-popup" class="popup-overlay hidden">
+  <div class="popup-box">
+    <h3>Thông tin đặt hàng</h3>
+    <label for="popup-name">Họ và tên:</label><br>
+    <input type="text" id="popup-name" placeholder="Nhập họ và tên"><br><br>
+    <label for="popup-phone">Số điện thoại:</label><br>
+    <input type="tel" id="popup-phone" placeholder="Nhập số điện thoại"><br><br>
+    <button onclick="confirmCheckout()" class="checkout-btn">Xác nhận</button>
+    <button onclick="closeCheckoutForm()" class="checkout-btn" style="background-color: #ccc;">Hủy</button>
+    <p id="checkout-result" style="margin-top: 10px; color: green; font-weight: bold;"></p>
+  </div>
+</div>
+
+  <footer>
+    <p>&copy; 2025 BabyCake. All rights reserved.</p>
+  </footer>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderCartPage();
+  });
+
+  function renderCartPage() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItems = document.getElementById("cart-items-page");
+    const total = document.getElementById("total-page");
+
+    cartItems.innerHTML = "";
+    let totalAmount = 0;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = `<p>Hiện chưa có sản phẩm nào trong giỏ hàng.</p>`;
+      total.textContent = "Tổng tiền: 0đ";
+      return;
+    }
+
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+          <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 10px;">
+          <div style="flex: 1;">
+            <strong>${item.name}</strong><br>
+            Giá: ${item.price.toLocaleString()}đ<br>
+            <div style="margin-top: 5px;">
+              <button onclick="changeQuantity('${item.name}', -1)">-</button>
+              <span style="margin: 0 8px;">${item.quantity}</span>
+              <button onclick="changeQuantity('${item.name}', 1)">+</button>
+              <button onclick="removeItem('${item.name}')" style="background: #ff4d4f; color: white; padding: 4px 8px; border: none; border-radius: 6px; margin-left: 10px;">Xóa</button>
+            </div>
+          </div>
+        </div>
+      `;
+      cartItems.appendChild(li);
+      totalAmount += item.price * item.quantity;
+    });
+
+    total.textContent = `Tổng tiền: ${totalAmount.toLocaleString()}đ`;
+  }
+
+  window.changeQuantity = function(name, change) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const item = cart.find(i => i.name === name);
+
+    if (item) {
+      item.quantity += change;
+      if (item.quantity <= 0) {
+        cart = cart.filter(i => i.name !== name);
+      }
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCartPage();
+    if (typeof updateCartUI === "function") updateCartUI();
+  };
+
+  window.removeItem = function(name) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.filter(i => i.name !== name);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCartPage();
+    if (typeof updateCartUI === "function") updateCartUI();
+  };
+
+  window.clearCart = function() {
+    localStorage.removeItem("cart");
+    renderCartPage();
+    if (typeof updateCartUI === "function") updateCartUI();
+  };
+
+  // Hiển thị form nhập thông tin đặt hàng
+  window.checkoutCart = function () {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) {
+      alert("Giỏ hàng của bạn đang trống.");
+    } else {
+      document.getElementById("checkout-popup").classList.remove("hidden");
+    }
+  };
+
+  // Xác nhận đặt hàng
+  function confirmCheckout() {
+    const name = document.getElementById("popup-name").value.trim();
+    const phone = document.getElementById("popup-phone").value.trim();
+    const result = document.getElementById("checkout-result");
+
+    if (!name || !phone) {
+      alert("Vui lòng nhập đầy đủ họ tên và số điện thoại.");
+      return;
+    }
+
+    result.textContent = `🎉 Cảm ơn ${name}, chúng tôi sẽ liên hệ với bạn qua số ${phone} để xác nhận đơn hàng.`;
+
+    localStorage.removeItem("cart");
+    renderCartPage();
+    if (typeof updateCartUI === "function") updateCartUI();
+
+    setTimeout(() => {
+      closeCheckoutForm();
+    }, 3000);
+  }
+
+  // Đóng form popup
+  function closeCheckoutForm() {
+    document.getElementById("checkout-popup").classList.add("hidden");
+    document.getElementById("checkout-result").textContent = "";
+    document.getElementById("popup-name").value = "";
+    document.getElementById("popup-phone").value = "";
+  }
+
+  // Gắn các hàm popup vào window để HTML có thể gọi được
+  window.confirmCheckout = confirmCheckout;
+  window.closeCheckoutForm = closeCheckoutForm;
+
+  // Gọi lại nếu dùng icon giỏ hàng trên header
+  if (typeof updateCartUI === 'function') updateCartUI();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Góc chia sẻ | BabyCake</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+<header>
+  <div class="container header-wrap">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/Logo.png" alt="BabyCake Logo">
+      </a>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Trang chủ</a></li>
+        <li><a href="sanpham.html">Sản phẩm</a></li>
+        <li><a href="gocchiase.html">Góc chia sẻ</a></li>
+        <li><a href="lienhe.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Giỏ hàng + Người dùng -->
+    <div class="header-actions">
+      <div class="cart-container">
+        <button class="cart-toggle" onclick="toggleCart()">
+          🛒 <span id="cart-count">0</span>
+        </button>
+        <div class="cart-box" id="cart-box">
+          <h3 class="cart-title">Giỏ hàng</h3> 
+          <ul id="cart-items" class="cart-items"></ul>
+          <div class="cart-footer">
+            <p class="total-amount" id="total">0đ</p>
+            <div class="cart-buttons">
+              <button class="btn-outline" onclick="viewCart()">XEM GIỎ HÀNG</button>
+              <button class="btn-primary" onclick="checkout()">THANH TOÁN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-info">
+        <span id="username-display"></span>
+        <span id="welcome-user" style="margin-left: auto; font-weight: bold;"></span>
+        <a href="dangnhap.html" id="login-link">
+          <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="User Icon" class="user-icon">
+        </a>
+        <button id="logout-btn" class="hidden">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- Góc chia sẻ -->
+  <section class="blog-section">
+    <div class="container">
+      <h2>Góc chia sẻ từ BabyCake</h2>
+      <p class="intro-text">Cùng khám phá những câu chuyện, mẹo vặt và bí quyết thú vị trong hành trình làm bánh cùng BabyCake!</p>
+
+      <div class="blog-grid">
+        <div class="blog-card">
+          <img src="images/blog1.jpeg" alt="Blog 1">
+          <h3>Granola là gì? Granola mua ở đâu và cách ăn granola đúng cách.</h3>
+          <p>Granola là gì? Granola mua ở đâu và cách ăn granola đúng cách.Granola là thực phẩm có lợi cho giảm cân và sức khỏe tim...</p>
+          <a href="#">Xem thêm →</a>
+        </div>
+
+        <div class="blog-card">
+          <img src="images/blog2.jpg" alt="Blog 2">
+          <h3>Bento Cake - Bánh mini phong cách Hàn Quốc</h3>
+          <p>Bento Cake là gì?Bento Cake là bánh kem có nguồn gốc từ Hàn Quốc, chiếc bánh kem có kích cỡ nhỏ xinh với màu sắc...</p>
+          <a href="#">Xem thêm →</a>
+        </div>
+
+        <div class="blog-card">
+          <img src="images/blog3.jpg" alt="Blog 3">
+          <h3>Bánh kem đốt cháy: "Cơn sốt" ẩm thực ngọt ngào khuấy đảo mạng xã hội đầu năm</h3>
+          <p>Mấy ngày qua Uyên nhận được rất nhiều câu hỏi về Bánh 𝐤𝐞𝐦 đ𝐨̂́𝐭 𝐜𝐡áy nhiều quá nà. Cũng phải thôi, bánh này đang HOT rần rần khắp mạng...</p>
+          <a href="#">Xem thêm →</a>
+        </div>
+
+        <div class="blog-card">
+          <img src="images/blog4.jpeg" alt="Blog 3">
+          <h3>Giải mã cơn sốt bento cake</h3>
+          <p>Những chiếc bánh kem luôn là một phần không thể thiếu trong các bữa tiệc, các ngày kỷ niệm hay các ngày lễ trọng đại. Giữa....</p>
+          <a href="#">Xem thêm →</a>
+        </div>
+
+        <div class="blog-card">
+          <img src="images/blog5.jpg" alt="Blog 3">
+          <h3>Giáng Sinh Đầy Yêu Thương, Ấm Ấp - Ngọt Ngào Với Bánh Kem BABYCAKE</h3>
+          <p>Giáng sinh nữa lại về. Chúc cho ai đó hạnh phúc bên cạnh nửa yêu thương và chúc ai đó đang cô đơn sẽ tìm thấy...</p>
+          <a href="#">Xem thêm →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Copyright &copy; 2025 BabyCake. All rights reserved.</p>
+    </div>
+  </footer>
+<!-- Form popup nhập thông tin khách hàng (dùng chung) -->
+<div id="checkout-popup" class="popup-overlay hidden">
+  <div class="popup-box">
+    <h3>Thông tin đặt hàng</h3>
+    <label for="popup-name">Họ và tên:</label><br>
+    <input type="text" id="popup-name" placeholder="Nhập họ và tên"><br><br>
+    <label for="popup-phone">Số điện thoại:</label><br>
+    <input type="tel" id="popup-phone" placeholder="Nhập số điện thoại"><br><br>
+    <button onclick="confirmCheckout()" class="checkout-btn">Xác nhận</button>
+    <button onclick="closeCheckoutForm()" class="checkout-btn" style="background-color: #ccc;">Hủy</button>
+    <p id="checkout-result" style="margin-top: 10px; color: green; font-weight: bold;"></p>
+  </div>
+</div>
+</body>
+</html>
