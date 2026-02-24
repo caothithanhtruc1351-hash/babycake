@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BabyCake | Tất cả sản phẩm</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="script.js" defer></script>
+</head>
+<body>
+   <!-- Header -->
+<header>
+  <div class="container header-wrap">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/Logo.png" alt="BabyCake Logo">
+      </a>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Trang chủ</a></li>
+        <li><a href="sanpham.html">Sản phẩm</a></li>
+        <li><a href="gocchiase.html">Góc chia sẻ</a></li>
+        <li><a href="lienhe.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Giỏ hàng + Người dùng -->
+    <div class="header-actions">
+      <div class="cart-container">
+        <button class="cart-toggle" onclick="toggleCart()">
+          🛒 <span id="cart-count">0</span>
+        </button>
+        <div class="cart-box" id="cart-box">
+          <h3 class="cart-title">Giỏ hàng</h3> 
+          <ul id="cart-items" class="cart-items"></ul>
+          <div class="cart-footer">
+            <p class="total-amount" id="total">0đ</p>
+            <div class="cart-buttons">
+              <button class="btn-outline" onclick="viewCart()">XEM GIỎ HÀNG</button>
+              <button class="btn-primary" onclick="checkout()">THANH TOÁN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-info">
+        <span id="username-display"></span>
+        <span id="welcome-user" style="margin-left: auto; font-weight: bold;"></span>
+        <a href="dangnhap.html" id="login-link">
+          <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="User Icon" class="user-icon">
+        </a>
+        <button id="logout-btn" class="hidden">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+ <section class="products">
+    <div class="container">
+      <h2>Tất cả sản phẩm</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="images/bento020.jpg" alt="Bento Cake 020">
+          <h3>Bento Cake Dễ Thương</h3>
+          <p class="price">Giá: 120.000đ</p>
+          <p class="desc">Bánh bento nhỏ xinh, thích hợp tặng bạn bè hoặc người thương.</p>
+          <button onclick="addToCart(this)" data-name="Bento Cake Dễ Thương" data-price="120000" data-image= "images/bento020.jpg">Thêm vào giỏ</button>
+        </div>
+        <div class="product-card">
+          <img src="images/H0015.jpg" alt="Bánh Kem Hoa Hồng">
+          <h3>Bánh Kem Hoa Hồng</h3>
+          <p class="price">Giá: 220.000đ</p>
+          <p class="desc">Bánh kem sữa tươi ít ngọt, tan nhanh trong miệng. Cốt bánh gato mềm mịn...</p>
+          <button onclick="addToCart(this)" data-name="Bánh Kem Hoa Hồng" data-price="220000" data-image="images/H0015.jpg">Thêm vào giỏ</button>
+        </div>
+        <div class="product-card">
+          <img src="images/VM0005.jpg" alt="Bánh Kem Vương Miện">
+          <h3>Bánh Kem Vương Miện</h3>
+          <p class="price">Giá: 195.000đ</p>
+          <p class="desc">Bánh kem sữa tươi ít ngọt, tan nhanh trong miệng. Cốt bánh gato mềm mịn..</p>
+          <button onclick="addToCart(this)" data-name="Cupcake ngọt ngào" data-price="195000" data-image="images/VM0005.jpg">Thêm vào giỏ</button>
+        </div>
+         <div class="product-card">
+          <img src="images/H0002.jpg" alt="Bánh Kem Hoa Tulip">
+          <h3>Bánh Kem Hoa Tulip</h3>
+          <p class="price">Giá: 180.000đ</p>
+          <p class="desc">Bánh kem sữa tươi ít ngọt, tan nhanh trong miệng...</p>
+          <button onclick="addToCart(this)" data-name="Bánh Kem Hoa Tulip" data-price="180000" data-image="images/H0002.jpg">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="products">
+  <div class="container">
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="images/bento01.jpg" alt="Bento Cake 01">
+        <h3>Bento Cake 01</h3>
+        <p class="price">Giá: 135.000đ</p>
+        <p class="desc">Những chiếc bánh gato bé xinh ai nhìn vào cũng thích mê.</p>
+        <button onclick="addToCart(this)" data-name="Bánh Chanh Dây Mát Lạnh" data-price="135000" data-image="images/bento01.jpg">Thêm vào giỏ</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/bento02.jpg" alt="Bento Cake 02">
+        <h3>Bento Cake 02</h3>
+        <p class="price">Giá: 150.000đ</p>
+        <p class="desc">Những chiếc bánh gato bé xinh ai nhìn vào cũng thích mê.</p>
+        <button onclick="addToCart(this)" data-name="Bánh Dâu Tươi Lạnh" data-price="150000" data-image="images/bento02.jpg">Thêm vào giỏ</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/bento03.jpg" alt="Bento Cake 03">
+        <h3>Bento Cake 03</h3>
+        <p class="price">Giá: 140.000đ</p>
+        <p class="desc">Những chiếc bánh gato bé xinh ai nhìn vào cũng thích mê.</p>
+        <button onclick="addToCart(this)" data-name="Bánh Cam Mát Lạnh" data-price="140000" data-image="images/bento03.jpg">Thêm vào giỏ</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/bento04.jpg" alt="Bento Cake 04">
+        <h3>Bento Cake 04</h3>
+        <p class="price">Giá: 140.000đ</p>
+        <p class="desc">Những chiếc bánh gato bé xinh ai nhìn vào cũng thích mê.</p>
+        <button onclick="addToCart(this)" data-name="Bánh Cam Mát Lạnh" data-price="140000" data-image="images/bento04.jpg">Thêm vào giỏ</button>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Copyright &copy; 2025 BabyCake. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- Form popup nhập thông tin khách hàng (dùng chung) -->
+<div id="checkout-popup" class="popup-overlay hidden">
+  <div class="popup-box">
+    <h3>Thông tin đặt hàng</h3>
+    <label for="popup-name">Họ và tên:</label><br>
+    <input type="text" id="popup-name" placeholder="Nhập họ và tên"><br><br>
+    <label for="popup-phone">Số điện thoại:</label><br>
+    <input type="tel" id="popup-phone" placeholder="Nhập số điện thoại"><br><br>
+    <button onclick="confirmCheckout()" class="checkout-btn">Xác nhận</button>
+    <button onclick="closeCheckoutForm()" class="checkout-btn" style="background-color: #ccc;">Hủy</button>
+    <p id="checkout-result" style="margin-top: 10px; color: green; font-weight: bold;"></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BabyCake | Bánh ngọt thủ công</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+<header>
+  <div class="container header-wrap">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/Logo.png" alt="BabyCake Logo">
+      </a>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Trang chủ</a></li>
+        <li><a href="sanpham.html">Sản phẩm</a></li>
+        <li><a href="gocchiase.html">Góc chia sẻ</a></li>
+        <li><a href="lienhe.html">Liên hệ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Giỏ hàng + Người dùng -->
+    <div class="header-actions">
+      <div class="cart-container">
+        <button class="cart-toggle" onclick="toggleCart()">
+          🛒 <span id="cart-count">0</span>
+        </button>
+        <div class="cart-box" id="cart-box">
+          <h3 class="cart-title">Giỏ hàng</h3> 
+          <ul id="cart-items" class="cart-items"></ul>
+          <div class="cart-footer">
+            <p class="total-amount" id="total">0đ</p>
+            <div class="cart-buttons">
+              <button class="btn-outline" onclick="viewCart()">XEM GIỎ HÀNG</button>
+              <button class="btn-primary" onclick="checkout()">THANH TOÁN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-info">
+        <span id="username-display"></span>
+        <span id="welcome-user" style="margin-left: auto; font-weight: bold;"></span>
+        <a href="dangnhap.html" id="login-link">
+          <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="User Icon" class="user-icon">
+        </a>
+        <button id="logout-btn" class="hidden">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Banner -->
+<section class="banner">
+  <div class="container banner-flex">
+    <div class="banner-image">
+      <img src="images/banner.png" alt="Bánh ngọt BabyCake">
+    </div>
+    <div class="banner-content">
+      <h1>Bánh ít ngọt – Giao nhanh nội thành</h1>
+<p>Ngọt ngào từng chiếc bánh – Trọn vị yêu thương</p>
+<p>BabyCake mang đến cho bạn những chiếc bánh nhỏ xinh, thơm ngon và đầy cảm xúc. Từ chiếc bánh đầu tiên đến từng lớp kem mịn, tất cả đều được làm từ nguyên liệu tươi ngon và tình yêu dành cho sự ngọt ngào.</p>
+<p>Dù là sinh nhật, kỷ niệm hay một buổi chiều nhẹ nhàng, BabyCake luôn đồng hành cùng bạn – với hương vị tinh tế, thiết kế đáng yêu và dịch vụ giao nhanh tận nơi.</p>
+<p><strong>BabyCake – Chạm nhẹ vị ngọt, lan tỏa yêu thương.</strong></p>
+      <a href="sanpham.html" class="btn">Xem mẫu & Đặt bánh</a>
+    </div>
+  </div>
+</section>
+
+  <!-- Sản phẩm -->
+  
+  <section class="products">
+    <div class="container">
+      <h2>Sản phẩm nổi bật</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="images/bento020.jpg" alt="Bento Cake 020">
+          <h3>Bento Cake Dễ Thương</h3>
+          <p class="price">Giá: 120.000đ</p>
+          <p class="desc">Bánh bento nhỏ xinh, thích hợp tặng bạn bè hoặc người thương.</p>
+          <button onclick="addToCart(this)" data-name="Bento Cake Dễ Thương" data-price="120000" data-image= "images/bento020.jpg">Thêm vào giỏ</button>
+        </div>
+        <div class="product-card">
+          <img src="images/H0015.jpg" alt="Bánh Kem Hoa Hồng">
+          <h3>Bánh Kem Hoa Hồng</h3>
+          <p class="price">Giá: 220.000đ</p>
+          <p class="desc">Bánh kem sữa tươi ít ngọt, tan nhanh trong miệng. Cốt bánh gato mềm mịn...</p>
+          <button onclick="addToCart(this)" data-name="Bánh Kem Hoa Hồng" data-price="220000" data-image="images/H0015.jpg">Thêm vào giỏ</button>
+        </div>
+        <div class="product-card">
+          <img src="images/VM0005.jpg" alt="Bánh Kem Vương Miện">
+          <h3>Bánh Kem Vương Miện</h3>
+          <p class="price">Giá: 195.000đ</p>
+          <p class="desc">Bánh kem sữa tươi ít ngọt, tan nhanh trong miệng. Cốt bánh gato mềm mịn..</p>
+          <button onclick="addToCart(this)" data-name="Cupcake ngọt ngào" data-price="195000" data-image="images/VM0005.jpg">Thêm vào giỏ</button>
+        </div>
+         <div class="product-card">
+          <img src="images/H0002.jpg" alt="Bánh Kem Hoa Tulip">
+          <h3>Bánh Kem Hoa Tulip</h3>
+          <p class="price">Giá: 180.000đ</p>
+          <p class="desc">Bánh kem sữa tươi ít ngọt, tan nhanh trong miệng...</p>
+          <button onclick="addToCart(this)" data-name="Bánh Kem Hoa Tulip" data-price="180000" data-image="images/H0002.jpg">Thêm vào giỏ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products">
+  <div class="container">
+    <h2>Bento Cake</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="images/bento01.jpg" alt="Bento Cake 01">
+        <h3>Bento Cake 01</h3>
+        <p class="price">Giá: 135.000đ</p>
+        <p class="desc">Những chiếc bánh gato bé xinh ai nhìn vào cũng thích mê.</p>
+        <button onclick="addToCart(this)" data-name="Bánh Chanh Dây Mát Lạnh" data-price="135000" data-image="images/bento01.jpg">Thêm vào giỏ</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/bento02.jpg" alt="Bento Cake 02">
+        <h3>Bento Cake 02</h3>
+        <p class="price">Giá: 150.000đ</p>
+        <p class="desc">Những chiếc bánh gato bé xinh ai nhìn vào cũng thích mê.</p>
+        <button onclick="addToCart(this)" data-name="Bánh Dâu Tươi Lạnh" data-price="150000" data-image="images/bento02.jpg">Thêm vào giỏ</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/bento03.jpg" alt="Bento Cake 03">
+        <h3>Bento Cake 03</h3>
+        <p class="price">Giá: 140.000đ</p>
+        <p class="desc">Những chiếc bánh gato bé xinh ai nhìn vào cũng thích mê.</p>
+        <button onclick="addToCart(this)" data-name="Bánh Cam Mát Lạnh" data-price="140000" data-image="images/bento03.jpg">Thêm vào giỏ</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/bento04.jpg" alt="Bento Cake 04">
+        <h3>Bento Cake 04</h3>
+        <p class="price">Giá: 140.000đ</p>
+        <p class="desc">Những chiếc bánh gato bé xinh ai nhìn vào cũng thích mê.</p>
+        <button onclick="addToCart(this)" data-name="Bánh Cam Mát Lạnh" data-price="140000" data-image="images/bento04.jpg">Thêm vào giỏ</button>
+      </div>
+    </div>
+  </div>
+</section>
+  <section class="info-sections">
+  <div class="container">
+    <div class="guide">
+      <h2>Hướng dẫn đặt bánh</h2>
+      <ol>
+        <li>Chọn mẫu hoặc gửi hình bạn muốn.</li>
+        <li>Chốt mẫu – đặt cọc 50%.</li>
+        <li>Nhận bánh tận nơi hoặc tại cửa hàng.</li>
+        <li>Thanh toán bằng chuyển khoản hoặc tiền mặt.</li>
+      </ol>
+    </div>
+    <div class="contact">
+      <h2>Liên hệ</h2>
+      <p>📍 3359 Phạm Thế Hiển, P7, Q8, TP.HCM</p>
+      <p>📞 0999.999.999 | ✉️ babycakevn@gmail.com</p>
+      <p>⏰ 07h – 20h mỗi ngày</p>
+    </div>
+  </div>
+</section>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Copyright &copy; 2025 BabyCake. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- Form popup nhập thông tin khách hàng (dùng chung) -->
+<div id="checkout-popup" class="popup-overlay hidden">
+  <div class="popup-box">
+    <h3>Thông tin đặt hàng</h3>
+    <label for="popup-name">Họ và tên:</label><br>
+    <input type="text" id="popup-name" placeholder="Nhập họ và tên"><br><br>
+    <label for="popup-phone">Số điện thoại:</label><br>
+    <input type="tel" id="popup-phone" placeholder="Nhập số điện thoại"><br><br>
+    <button onclick="confirmCheckout()" class="checkout-btn">Xác nhận</button>
+    <button onclick="closeCheckoutForm()" class="checkout-btn" style="background-color: #ccc;">Hủy</button>
+    <p id="checkout-result" style="margin-top: 10px; color: green; font-weight: bold;"></p>
+  </div>
+</div>
+</body>
+</html>
